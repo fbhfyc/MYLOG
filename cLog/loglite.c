@@ -336,6 +336,7 @@
      return result;
  }
  
+/*
  static int init_log_path(void)
  {
      int result = 0;
@@ -362,6 +363,9 @@
                          result = -1;
                          break;
                      }
+		     else {
+                         printf("logpath: %s mkdir succeed\n", g_global_param.path);
+		     }
                  }
                  
                  g_global_param.path[i] = '/';
@@ -378,6 +382,9 @@
                      printf("logpath: %s mkdir failed\n", g_global_param.path);
                      result = -1;
                  }
+		 else {
+                     printf("logpath: %s mkdir succeed\n", g_global_param.path);
+		 }
              }
          }
          
@@ -385,6 +392,31 @@
      
      return result;
  }
+*/
+
+int init_log_path(void)
+{
+    char DirName[256];
+    strcpy(DirName, g_global_param.path);
+    int i, len = strlen(DirName);
+    if (DirName[len - 1] != '/')
+        strcat(DirName, "/");
+    
+    len = strlen(DirName);
+    for (i = 1; i < len; i++) {
+        if (DirName[i] == '/') {
+            DirName[i] = 0;
+            if (access(DirName, F_OK) != 0) {
+                if (mkdir(DirName, 0755) == -1) {
+                    perror("mkdir error");
+                    return -1;
+                }
+            }
+            DirName[i] = '/';
+        }
+    }
+    return 0;
+} 
  
  static int init_log_file_number(void)
  {
