@@ -391,7 +391,13 @@
      int result = 0;
      
      DIR* dp = opendir(g_global_param.path);
-     if (NULL != dp)
+     if (NULL == dp)
+     {
+         printf("logpath: %s open failed\n", g_global_param.path);
+         result = -1;
+	 return result;
+     }
+     else
      {
          struct dirent* entry = NULL;
          while ((entry = readdir(dp)) != NULL)
@@ -438,11 +444,6 @@
                  }
              }
          }
-     }
-     else
-     {
-         printf("logpath: %s open failed\n", g_global_param.path);
-         result = -1;
      }
      
      closedir(dp);
