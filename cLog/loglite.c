@@ -221,8 +221,8 @@
  static void open_log_file(MODULE_ID id)
  {
      char file[FILE_MAX_LEN] = { 0 };
-     snprintf(file, sizeof(file), "%s/%s.log",
-         g_global_param.path, g_module_param[id].name);
+     snprintf(file, sizeof(file), "%s/%s/%s.log",
+         g_global_param.path,g_module_param[id].name, g_module_param[id].name);
          
      g_module_param[id].file = fopen(file, "a");
      if (g_module_param[id].file != NULL)
