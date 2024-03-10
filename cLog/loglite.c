@@ -397,24 +397,31 @@
 int init_log_path(void)
 {
     char DirName[256];
-    strcpy(DirName, g_global_param.path);
-    int i, len = strlen(DirName);
-    if (DirName[len - 1] != '/')
-        strcat(DirName, "/");
-    
-    len = strlen(DirName);
-    for (i = 1; i < len; i++) {
-        if (DirName[i] == '/') {
-            DirName[i] = 0;
-            if (access(DirName, F_OK) != 0) {
-                if (mkdir(DirName, 0755) == -1) {
-                    perror("mkdir error");
-                    return -1;
-                }
-            }
-            DirName[i] = '/';
-        }
+
+    for (int i=0;i<MODULE_ID_MAX;++i) {
+        memset(DirName,0,sizeof(DirName));   
+      	strcpy(DirName, g_global_param.path);
+    	int len1 = strlen(DirName);
+        if (DirName[len1] != '/')
+       		strcat(DirName, "/");
+    	strcat(DirName,g_module_param[i].name);
+    	int len2 = strlen(DirName);
+    	if (DirName[len2] != '/')
+        	strcat(DirName, "/");
+    	for (int i = 1; i < len2+1; i++) {
+        	if (DirName[i] == '/') {
+            	DirName[i] = 0;
+            	if (access(DirName, F_OK) != 0) {
+                	if (mkdir(DirName, 0755) == -1) {
+                    	perror("mkdir error");
+                    	return -1;
+                	}
+            	}
+            	DirName[i] = '/';
+        	}
+    	}
     }
+    
     return 0;
 } 
  
