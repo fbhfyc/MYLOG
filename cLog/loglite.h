@@ -15,6 +15,7 @@
  #define _LOGLITE_H_
  
  #include <string.h>
+ #include "cjson/cJSON.h"
  
  #ifdef __cplusplus
  extern "C" {
