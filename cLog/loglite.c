@@ -260,8 +260,33 @@
      }
  }
  
+#define CONFIG_FILE "log.conf"
  static int init_log_config(const char* config)
  {
+     char* buffer = NULL; 
+     FILE* file = fopen(CONFIG_FILE,"r");
+     if ( NULL == file) {
+	     return -1;
+     }
+
+     fseek(file,0,SEEK_END);
+     long long length = ftell(file);
+     fseek(file,0,SEEK_SET);
+
+     buffer = (char*)malloc(length+1);
+     if ( NULL == buffer ) {
+	     fclose(file);
+	     return -1;
+     }
+
+    size_t read_size = fread(buffer,1,length,file);
+     if ( read_size != length ) {
+	     fclose(file);
+	     free(buffer);
+	     return -1;
+     }
+
+	    /**/
      int result = 0;
      
      do {
