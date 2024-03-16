@@ -8,7 +8,7 @@ int main(int argc, char** argv)
     log_init("./log.config");
 
     LOGW(MODULE_A, "%s--%d", "\n", "Hello world", 1);
-    LOGE(MODULE_A, "%s--%d", "\n", "Hello world", 2);
+    LOGE(MODULE_B, "%s--%d", "\n", "Hello world", 2);
 
     char* test = "Hello world";
 

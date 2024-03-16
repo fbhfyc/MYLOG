@@ -1,8 +1,8 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -O2 -fPIC
+CFLAGS = -Wall -Wextra -O2 -fPIC -I../kk 
 LDFLAGS = -shared
 
-SRC = loglite.c
+SRC = loglite.c cjson/cJSON.c  # 添加了cjson.c
 OBJ = $(SRC:.c=.o)
 LIB = libloglite.so
 
