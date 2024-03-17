@@ -337,6 +337,8 @@
      g_module_param[MODULE_D].output = log_D_output->valueint;
 
      free(buffer);
+     cJSON_Delete(json);
+
      return result;
     /*
      
