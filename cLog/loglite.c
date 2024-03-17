@@ -270,7 +270,7 @@
      }
 
      fseek(file,0,SEEK_END);
-     long long length = ftell(file);
+     size_t  length = ftell(file);
      fseek(file,0,SEEK_SET);
 
      buffer = (char*)malloc(length+1);
@@ -286,6 +286,17 @@
 	     return -1;
      }
 
+     buffer[length] = '\0';
+     fclose(file);
+
+     cJSON* json = cJSON_Parse(buffer);
+     if ( !json ) {
+	     free(buffer);
+	     return -1;
+     }
+
+     cJSON* log_path = cJSON_GetObjectItemCaseSensitive(json,"log_path");
+     printf("log_path: %s\n", log_path->valuestring);
 	    /**/
      int result = 0;
      

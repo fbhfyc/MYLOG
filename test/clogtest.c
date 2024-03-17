@@ -1,5 +1,4 @@
-#include <loglite.h>
-#include <loglite.c>
+#include "../cLog/loglite.h"
 
 extern int log_init(const char* config);
 

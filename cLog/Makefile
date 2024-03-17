@@ -1,18 +1,18 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -O2 -fPIC -I../cjson
+CFLAGS = -Wall -Wextra -O2 -fPIC 
 LDFLAGS = -shared
 
-SRC = loglite.c cjson/cJSON.c  # 添加了cjson.c
+SRC = loglite.c cJSON.c  # 添加了cjson.c
 OBJ = $(SRC:.c=.o)
 LIB = libloglite.so
 
 all: $(LIB)
 
 $(LIB): $(OBJ)
-	$(CC) $(LDFLAGS) -o $@ $^ -I../cjson
+	$(CC) $(LDFLAGS) -o $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<  -I../cjson
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	rm -f $(OBJ) $(LIB)

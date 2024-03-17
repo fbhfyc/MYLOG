@@ -1,8 +1,0 @@
-[2024-02-24 17:01:02.389] [WRAN ] [140279001270080] [clogtest.c:10 main] Hello world--1
-[2024-02-24 17:01:02.389] [ERROR] [140279001270080] [clogtest.c:11 main] Hello world--2
-[2024-02-24 17:01:02.389] [INFO ] [140279001270080] [clogtest.c:15 main] Hello world
-[2024-02-24 17:01:02.389] [WRAN ] [140279001270080] [clogtest.c:16 main] Hello world--4
-[2024-02-24 21:28:12.644] [WRAN ] [140459177637696] [clogtest.c:10 main] Hello world--1
-[2024-02-24 21:28:12.644] [ERROR] [140459177637696] [clogtest.c:11 main] Hello world--2
-[2024-02-24 21:28:12.644] [INFO ] [140459177637696] [clogtest.c:15 main] Hello world
-[2024-02-24 21:28:12.644] [WRAN ] [140459177637696] [clogtest.c:16 main] Hello world--4
