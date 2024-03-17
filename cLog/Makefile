@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -O2 -fPIC 
+CFLAGS = -Wall -Wextra -fPIC -g 
 LDFLAGS = -shared
 
 SRC = loglite.c cJSON.c  # 添加了cjson.c

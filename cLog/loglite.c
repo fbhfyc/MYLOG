@@ -263,6 +263,7 @@
 #define CONFIG_FILE "log.conf"
  static int init_log_config(const char* config)
  {
+     int result = 0;
      char* buffer = NULL; 
      FILE* file = fopen(CONFIG_FILE,"r");
      if ( NULL == file) {
@@ -296,9 +297,48 @@
      }
 
      cJSON* log_path = cJSON_GetObjectItemCaseSensitive(json,"log_path");
-     printf("log_path: %s\n", log_path->valuestring);
-	    /**/
-     int result = 0;
+     strcpy(g_global_param.path,log_path->valuestring);
+
+     cJSON *log_flush = cJSON_GetObjectItemCaseSensitive(json, "log_flush");
+     g_global_param.output_flush = log_flush->valueint;
+
+
+     cJSON *log_file_count = cJSON_GetObjectItemCaseSensitive(json,"log_file_count");
+     g_global_param.file_count = log_file_count->valueint;
+
+     cJSON *log_file_size = cJSON_GetObjectItemCaseSensitive(json,"log_file_size");
+     g_global_param.file_size = log_file_size->valueint;
+
+     cJSON *log_reserve_space = cJSON_GetObjectItemCaseSensitive(json,"log_reserve_space");
+     g_global_param.reserve_space = log_reserve_space->valueint;
+
+     cJSON *log_A_level = cJSON_GetObjectItemCaseSensitive(json, "log_A_level");
+     g_module_param[MODULE_A].level = log_A_level->valueint;
+
+     cJSON *log_B_level = cJSON_GetObjectItemCaseSensitive(json, "log_B_level");
+     g_module_param[MODULE_B].level = log_B_level->valueint;
+
+     cJSON *log_C_level = cJSON_GetObjectItemCaseSensitive(json, "log_C_level");
+     g_module_param[MODULE_C].level = log_C_level->valueint;
+
+     cJSON *log_D_level = cJSON_GetObjectItemCaseSensitive(json, "log_D_level");
+     g_module_param[MODULE_D].level = log_D_level->valueint;
+
+     cJSON *log_A_output = cJSON_GetObjectItemCaseSensitive(json, "log_A_output");
+     g_module_param[MODULE_A].output = log_A_output->valueint;
+
+     cJSON *log_B_output = cJSON_GetObjectItemCaseSensitive(json, "log_B_output");
+     g_module_param[MODULE_B].output = log_B_output->valueint;
+
+     cJSON *log_C_output = cJSON_GetObjectItemCaseSensitive(json, "log_C_output");
+     g_module_param[MODULE_C].output = log_C_output->valueint;
+
+     cJSON *log_D_output = cJSON_GetObjectItemCaseSensitive(json, "log_D_output");
+     g_module_param[MODULE_D].output = log_D_output->valueint;
+
+     free(buffer);
+     return result;
+    /*
      
      do {
          if (NULL == config)
@@ -320,11 +360,11 @@
              trim(line);
              if (line[0] != '#')
              {
-                 get_config_string(line, "log_path", g_global_param.path, sizeof(g_global_param.path));
-                 get_config_number(line, "log_flush", &g_global_param.output_flush, sizeof(g_global_param.output_flush));
-                 get_config_number(line, "log_file_count", &g_global_param.file_count, sizeof(g_global_param.file_count));
-                 get_config_number(line, "log_file_size", &g_global_param.file_size, sizeof(g_global_param.file_size));
-                 get_config_number(line, "log_reserve_space", &g_global_param.reserve_space, sizeof(g_global_param.reserve_space));
+                 //get_config_string(line, "log_path", g_global_param.path, sizeof(g_global_param.path));
+//                 get_config_number(line, "log_flush", &g_global_param.output_flush, sizeof(g_global_param.output_flush));
+//                 get_config_number(line, "log_file_count", &g_global_param.file_count, sizeof(g_global_param.file_count));
+//                 get_config_number(line, "log_file_size", &g_global_param.file_size, sizeof(g_global_param.file_size));
+//                 get_config_number(line, "log_reserve_space", &g_global_param.reserve_space, sizeof(g_global_param.reserve_space));
                  
                  get_config_number(line, "log_A_level",  &g_module_param[MODULE_A].level,  sizeof(g_module_param[MODULE_A].level));
                  get_config_number(line, "log_B_level",  &g_module_param[MODULE_B].level,  sizeof(g_module_param[MODULE_B].level));
@@ -339,6 +379,7 @@
      } while(0);
      
      return result;
+     */
  }
  
  static int check_log_config(void)
