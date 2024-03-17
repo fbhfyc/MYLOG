@@ -1,10 +1,10 @@
 #include "../cLog/loglite.h"
 
-extern int log_init(const char* config);
+extern int log_init(const char* config,const char* moduleName);
 
 int main(int argc, char** argv)
 {
-    log_init("./log.config");
+    log_init("./log.config",argv[0]);
 
     LOGW(MODULE_A, "%s--%d", "\n", "Hello world", 1);
     LOGE(MODULE_B, "%s--%d", "\n", "Hello world", 2);

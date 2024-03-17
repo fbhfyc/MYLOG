@@ -568,8 +568,9 @@ int init_log_path(void)
      return result;
  }
  
- int log_init(const char* config)
+ int log_init(const char* config,const char* moduleName)
  {
+	 printf("--moduleName---%s\n",moduleName);
      // 1.init log config
      int result = init_log_config(config);
      

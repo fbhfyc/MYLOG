@@ -54,7 +54,7 @@
  *
  * @return int 0：成功，其它：失败
  */
- int log_init(const char* config);
+ int log_init(const char* config,const char* moduleName);
  
  /**
  * @brief 日志输出
