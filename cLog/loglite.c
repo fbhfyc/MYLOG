@@ -570,7 +570,8 @@ int init_log_path(void)
  
  int log_init(const char* config,const char* moduleName)
  {
-	 printf("--moduleName---%s\n",moduleName);
+     const char* exeName = strrchr(moduleName,'/');
+     const char* mName = (exeName != NULL) ? exeName+1 : moduleName;
      // 1.init log config
      int result = init_log_config(config);
      
