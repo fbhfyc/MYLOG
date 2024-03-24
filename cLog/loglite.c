@@ -1,10 +1,10 @@
  /**
- * Copyright (c) 2023 yuwanxian
+ * Copyright (c) 2024 
  *     All rights reserved.
  *
  * File: loglite.c
- * Author: yuwanxian
- * Time: 2023/07/07
+ * Author: 
+ * Time: 2024/03
  * Version: 1.0.0
  * 
  * Loglite interface implementation
