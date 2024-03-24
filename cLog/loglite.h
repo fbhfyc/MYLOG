@@ -30,6 +30,7 @@
      MODULE_B,
      MODULE_C,
      MODULE_D,
+     APPNAME,
      MODULE_ID_MAX
  } MODULE_ID;
  
@@ -92,6 +93,11 @@
  //#define LOG_VAARGS_EX LOG_FILE_NAME, __LINE__, __func__
  #define LOG_VAARGS_EX __FILE__,__LINE__, __func__
  
+ #define LT(format, suffix, ...)\
+         logging(LOG_TRACE, APPNAME, LOG_VAARGS_EX, format, suffix, ##__VA_ARGS__)
+ #define LI(format, suffix, ...)\
+         logging(LOG_INFO, APPNAME, LOG_VAARGS_EX, format, suffix, ##__VA_ARGS__)
+
  #define LOGT(id, format, suffix, ...)\
          logging(LOG_TRACE, id, LOG_VAARGS_EX, format, suffix, ##__VA_ARGS__)
  

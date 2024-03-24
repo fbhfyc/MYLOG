@@ -61,13 +61,15 @@
      { NULL, "A", 5, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER },
      { NULL, "B", 0, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER },
      { NULL, "C", 0, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER },
-     { NULL, "D", 0, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER }
+     { NULL, "D", 0, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER },
+     { NULL, "defultname", 0, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER }
  };
  
  static char const* const g_log_level[LOG_LEVEL_MAX] = {
      "TRACE", "DEBUG", "INFO", "WRAN", "ERROR", "FATAL", "CLOSE"
  };
  
+/*
  // remove spaces and endl
  static void trim(char* str)
  {
@@ -124,6 +126,8 @@
              strncpy(dst, posBeg + 1U, size);
          }
  }
+ */
+
  
  static char* get_log_time(char time[32])
  {
@@ -263,6 +267,7 @@
 #define CONFIG_FILE "log.conf"
  static int init_log_config(const char* config)
  {
+	printf("--%s--",config);
      int result = 0;
      char* buffer = NULL; 
      FILE* file = fopen(CONFIG_FILE,"r");
@@ -343,7 +348,7 @@
     /*
      
      do {
-         if (NULL == config)
+         if (NULL = config)
          {
              printf("init log config failed, file is null\n");
              result = -1;
@@ -572,6 +577,8 @@ int init_log_path(void)
  {
      const char* exeName = strrchr(moduleName,'/');
      const char* mName = (exeName != NULL) ? exeName+1 : moduleName;
+
+     strcpy(g_module_param[APPNAME].name,mName);
      // 1.init log config
      int result = init_log_config(config);
      
