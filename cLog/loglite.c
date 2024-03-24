@@ -203,8 +203,8 @@
          char oldname[FILE_MAX_LEN] = { 0 };
          char newname[FILE_MAX_LEN] = { 0 };
          
-         snprintf(oldname, sizeof(oldname), "%s/%s.log",g_global_param.path, g_module_param[id].name);
-         snprintf(newname, sizeof(newname), "%s/%s_1.log",g_global_param.path, g_module_param[id].name);
+         snprintf(oldname, sizeof(oldname), "%s/%s/%s.log",g_global_param.path,g_module_param[id].name, g_module_param[id].name);
+         snprintf(newname, sizeof(newname), "%s/%s/%s_1.log",g_global_param.path,g_module_param[id].name, g_module_param[id].name);
                  
          if (0 == access(oldname, F_OK))
          {
@@ -245,7 +245,10 @@
  
  static void check_log_file(MODULE_ID id)
  {
-     long fileSize = ftell(g_module_param[id].file);
+     fseek(g_module_param[id].file,0,SEEK_END);
+     size_t fileSize = ftell(g_module_param[id].file);
+     fseek(g_module_param[id].file,0,SEEK_SET);
+   //  long fileSize = ftell(g_module_param[id].file);
      if (fileSize > g_global_param.file_size * BINARY_UNIT * BINARY_UNIT)
      {
          struct statvfs fs;
