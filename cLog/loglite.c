@@ -58,10 +58,11 @@
  };
  
  static ModuleLogParam g_module_param[MODULE_ID_MAX] = {
-     { NULL, "A", 5, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER },
+ /*    { NULL, "A", 5, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER },
      { NULL, "B", 0, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER },
      { NULL, "C", 0, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER },
      { NULL, "D", 0, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER },
+ */
      { NULL, "defultname", 0, LOG_INFO, LOG_FILE, PTHREAD_MUTEX_INITIALIZER }
  };
  
@@ -320,6 +321,7 @@
      cJSON *log_reserve_space = cJSON_GetObjectItemCaseSensitive(json,"log_reserve_space");
      g_global_param.reserve_space = log_reserve_space->valueint;
 
+     /*
      cJSON *log_A_level = cJSON_GetObjectItemCaseSensitive(json, "log_A_level");
      g_module_param[MODULE_A].level = log_A_level->valueint;
 
@@ -343,6 +345,7 @@
 
      cJSON *log_D_output = cJSON_GetObjectItemCaseSensitive(json, "log_D_output");
      g_module_param[MODULE_D].output = log_D_output->valueint;
+     */
 
      free(buffer);
      cJSON_Delete(json);

@@ -17,6 +17,7 @@ int main(int argc, char** argv)
     A_LOGW("%s--%d", test, 4);
     */
     LI("%s--%d", "\n", "Hello world", 2);
+    LW("%s--%d", "\n", "Hello world", 2);
     }
 
     log_drop();

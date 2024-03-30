@@ -26,10 +26,12 @@
  * @brief 模块ID
  */
  typedef enum {
+     /*
      MODULE_A,
      MODULE_B,
      MODULE_C,
      MODULE_D,
+     */
      APPNAME,
      MODULE_ID_MAX
  } MODULE_ID;
