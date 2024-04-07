@@ -3,7 +3,6 @@
  *     All rights reserved.
  *
  * File: loglite.c
- * Author: 
  * Time: 2024/03
  * Version: 1.0.0
  * 
@@ -184,10 +183,10 @@
          char oldname[FILE_MAX_LEN] = { 0 };
          char newname[FILE_MAX_LEN] = { 0 };
          
-         snprintf(oldname, sizeof(oldname), "%s/%s_%d.log",
-             g_global_param.path, g_module_param[id].name, i);
-         snprintf(newname, sizeof(newname), "%s/%s_%d.log",
-             g_global_param.path, g_module_param[id].name, i+1);
+         snprintf(oldname, sizeof(oldname), "%s/%s/%s_%d.log",
+             g_global_param.path, g_module_param[id].name, g_module_param[id].name, i);
+         snprintf(newname, sizeof(newname), "%s/%s/%s_%d.log",
+             g_global_param.path, g_module_param[id].name, g_module_param[id].name, i + 1);
                  
          if (0 == access(oldname, F_OK))
          {
@@ -518,11 +517,15 @@ int init_log_path(void)
  static int init_log_file_number(void)
  {
      int result = 0;
+     char modleLogPathTmp[1024]={0};
+     strcpy(modleLogPathTmp,g_global_param.path);
+     strcat(modleLogPathTmp,"/");
+     strcat(modleLogPathTmp,g_module_param[0].name);
      
-     DIR* dp = opendir(g_global_param.path);
+     DIR* dp = opendir(modleLogPathTmp);
      if (NULL == dp)
      {
-         printf("logpath: %s open failed\n", g_global_param.path);
+         printf("logpath: %s open failed\n",modleLogPathTmp);
          result = -1;
 	 return result;
      }
@@ -547,7 +550,7 @@ int init_log_path(void)
                      
                      char* posBeg = strstr(name, head);
                      char* posEnd = strstr(name, ".log");
-                     if (posBeg != NULL && posEnd != NULL)
+                     if (posBeg != NULL  && posEnd != NULL)
                      {
                          char value[16] = { 0 };
                          posBeg = posBeg + headlen + 1;

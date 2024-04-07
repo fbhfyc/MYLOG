@@ -99,7 +99,7 @@
          logging(LOG_TRACE, APPNAME, LOG_VAARGS_EX, format, suffix, ##__VA_ARGS__)
  #define LI(format, suffix, ...)\
          logging(LOG_INFO, APPNAME, LOG_VAARGS_EX, format, suffix, ##__VA_ARGS__)
- #define LW(id, format, suffix, ...)\
+ #define LW(format, suffix, ...)\
          logging(LOG_WARN, APPNAME, LOG_VAARGS_EX, format, suffix, ##__VA_ARGS__)
 
 
