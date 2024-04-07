@@ -159,21 +159,39 @@
          char oldfile[FILE_MAX_LEN] = { 0 };
          if (0 == g_global_param.file_count)
          {
-             snprintf(oldfile, sizeof(oldfile), "%s/%s.log",
-                 g_global_param.path, g_module_param[id].name);
+             snprintf(oldfile, sizeof(oldfile), "%s/%s/%s.log",
+                 g_global_param.path, g_module_param[id].name, g_module_param[id].name);
          }
          else
          {
-             snprintf(oldfile, sizeof(oldfile), "%s/%s_%d.log",
-                 g_global_param.path, g_module_param[id].name, g_global_param.file_count);
+             snprintf(oldfile, sizeof(oldfile), "%s/%s/%s_%d.log",
+                 g_global_param.path, g_module_param[id].name, g_module_param[id].name, g_global_param.file_count);
          }
          
          if (0 == access(oldfile, F_OK))
          {
+		 /*
              if (0 != remove(oldfile))
              {
                  printf("logfile: %s remove failed\n", oldfile);
              }
+		  * */
+	    char command[1024];
+            char tm[32] = { 0 };
+    time_t now = time(NULL);
+    strftime(tm, sizeof(tm), "%Y-%m-%d_%H-%M-%S", localtime(&now)); // 用下划线替换冒号
+    printf("Timestamp: %s\n", tm);
+            //get_log_time(tm);
+            sprintf(command, "mv %s %s.%s && gzip %s.%s", oldfile, oldfile, tm, oldfile, tm);
+
+            int result = system(command);
+	    if (result == -1) {
+                 perror("system");
+		 return;
+    	   } else {
+        	printf("Command executed successfully with exit code %d\n", result);
+           }
+
          }
      }
      
